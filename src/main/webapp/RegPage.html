@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="Style_Reg_Form.css">
+	<title>Registration Form</title>
+	<script>
+	
+		function validMail(str)
+		{
+			let x = str.indexOf('@');
+			let y = str.indexOf('.');
+	
+			let z = y - x;
+	
+			if (z == 6) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	
+		function validation() {
+			var name = document.myForm.uname.value;
+			var password = document.myForm.password.value;
+			var fname = document.myForm.fname.value;
+			var lname = document.myForm.lname.value;
+			var address = document.myForm.address.value;
+			var email = document.myForm.mid.value;
+			var phoneno = document.myForm.mobileno.value;
+	
+			var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+			// !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(name))
+			if (name.trim() == "" || validMail(name)) {
+				alert("First Input You have entered an invalid email address!")
+				return false
+			}
+	
+			if (fname.trim() == "") {
+				alert("First-Name must be filled out")
+				return false;
+			}
+			if (lname.trim() == "") {
+				alert("Last-Name must be filled out")
+				return false;
+			}
+			if (address.trim() == "") {
+				alert("Address must be filled out")
+				return false;
+			}
+			if (email.trim() == "" || validMail(email)) {
+				alert("6th Text Input You have entered an invalid email address!")
+				return false
+			}
+			if (!phoneno.match(/^\d{10}$/)) {
+				alert("Enter Integer Value and input<=10");
+				return false
+			}
+			if (password.trim() == "") {
+				alert("Please enter your password");
+				return false;
+			}
+			if (password.length <= 8) {
+				alert("Password should be atleast 6 character long");
+				return false;
+	
+			}
+	
+			//!password.match(/^[A-Za-z_]\w{7,15}$/)
+			if (!password.match(regex)) {
+				alert("Enter valid password(must start with a letter and between 6-8 characters)");
+				return false
+			}
+			return true
+		}
+	</script>
+</head>
+
+<body>
+	<p class="para">User Registration</p>
+	<div class="container">
+		<form action="reg" onsubmit="return validation()" name="myForm"
+			method="POST">
+			<div class="input_sec">
+				<input type="text" placeholder="Email" name="uname" autofocus>
+				<input type="password" placeholder="Password" name="password" required> 
+				<input type="text" placeholder="First Name" name="fname" required>
+				<input type="text" placeholder="Last Name" name="lname" required> 
+				<input type="text" placeholder="Middle Name" name="mname" >
+				<input type="text" placeholder="Address" name="address" required>
+				<input type="text" placeholder="Email" name="mid" required>
+				<input type="text" placeholder="Mobile Number" name="mobileno" required>
+			</div>
+			<div id="btn">
+				<input type="submit" value="Register">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
